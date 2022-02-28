@@ -12,8 +12,8 @@ class App extends React.Component {
     super(props);
     this.state = {  
       isUserAthanticated: JSON.parse(localStorage.getItem('isUserAthanticated')),
-      data: JSON.parse(localStorage.getItem('UserData')),
-      addressData: JSON.parse(localStorage.getItem('UserAddress'))
+      data: JSON.parse(localStorage.getItem('userData')),
+      addressData: {}
     }
   }
 

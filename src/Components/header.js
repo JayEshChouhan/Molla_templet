@@ -2,11 +2,11 @@ import React, { useEffect , useState} from 'react';
 import { Link,NavLink } from "react-router-dom";
 export default function Header(prop){
     function logout() {
-        localStorage.removeItem('UserData');
-        localStorage.removeItem('UserAddress');
+        localStorage.removeItem('userData');
+        // localStorage.removeItem('UserAddress');
         localStorage.setItem('isUserAthanticated', false)
-        window.location.href = '/login';
         prop.updateState(prop.isUserAthanticated)
+        window.location.href = '/login';
     }
     return(
       <header className={prop.headerTheam}>
@@ -106,75 +106,81 @@ export default function Header(prop){
                         </div>
                     </form>
                 </div>
-                <div className="wishlist">
-                    <a href="#" title="Wishlist">
-                        <i className="icon-heart-o"></i>
-                        <span className="wishlist-count">3</span>
-                    </a>
-                </div>
+                {!prop.isUserAthanticated ? (
+                    ""
+                ):(
+                    <>
+                        <div className="wishlist">
+                            <a href="#" title="Wishlist">
+                                <i className="icon-heart-o"></i>
+                                <span className="wishlist-count">3</span>
+                            </a>
+                        </div>
 
-                <div className="dropdown cart-dropdown">
-                    <a href="#" className="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                        <i className="icon-shopping-cart"></i>
-                        {/* { <span className="cart-count">{ prop }</span> } */}
-                        <span className="cart-count">2</span>
-                    </a>
+                        <div className="dropdown cart-dropdown">
+                            <a href="#" className="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                <i className="icon-shopping-cart"></i>
+                                {/* { <span className="cart-count">{ prop }</span> } */}
+                                <span className="cart-count">2</span>
+                            </a>
 
-                    <div className="dropdown-menu dropdown-menu-right">
-                        <div className="dropdown-cart-products">
-                            <div className="product">
-                                <div className="product-cart-details">
-                                    <h4 className="product-title">
-                                        <a href="#">Beige knitted elastic runner shoes</a>
-                                    </h4>
+                            <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-cart-products">
+                                    <div className="product">
+                                        <div className="product-cart-details">
+                                            <h4 className="product-title">
+                                                <a href="#">Beige knitted elastic runner shoes</a>
+                                            </h4>
 
-                                    <span className="cart-product-info">
-                                        <span className="cart-product-qty">1</span>
-                                        x $84.00
-                                    </span>
+                                            <span className="cart-product-info">
+                                                <span className="cart-product-qty">1</span>
+                                                x $84.00
+                                            </span>
+                                        </div>
+
+                                        <figure className="product-image-container">
+                                            <a href="#" className="product-image">
+                                                <img src="assets/images/products/cart/product-1.jpg" alt="product" />
+                                            </a>
+                                        </figure>
+                                        <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close"></i></a>
+                                    </div>
+
+                                    <div className="product">
+                                        <div className="product-cart-details">
+                                            <h4 className="product-title">
+                                                <a href="#">Blue utility pinafore denim dress</a>
+                                            </h4>
+
+                                            <span className="cart-product-info">
+                                                <span className="cart-product-qty">1</span>
+                                                x $76.00
+                                            </span>
+                                        </div>
+
+                                        <figure className="product-image-container">
+                                            <a href="#" className="product-image">
+                                                <img src="assets/images/products/cart/product-2.jpg" alt="product" />
+                                            </a>
+                                        </figure>
+                                        <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close"></i></a>
+                                    </div>
                                 </div>
 
-                                <figure className="product-image-container">
-                                    <a href="#" className="product-image">
-                                        <img src="assets/images/products/cart/product-1.jpg" alt="product" />
-                                    </a>
-                                </figure>
-                                <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close"></i></a>
-                            </div>
+                                <div className="dropdown-cart-total">
+                                    <span>Total</span>
 
-                            <div className="product">
-                                <div className="product-cart-details">
-                                    <h4 className="product-title">
-                                        <a href="#">Blue utility pinafore denim dress</a>
-                                    </h4>
-
-                                    <span className="cart-product-info">
-                                        <span className="cart-product-qty">1</span>
-                                        x $76.00
-                                    </span>
+                                    <span className="cart-total-price">$160.00</span>
                                 </div>
 
-                                <figure className="product-image-container">
-                                    <a href="#" className="product-image">
-                                        <img src="assets/images/products/cart/product-2.jpg" alt="product" />
-                                    </a>
-                                </figure>
-                                <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close"></i></a>
+                                <div className="dropdown-cart-action">
+                                    <a href="#" className="btn btn-primary">View Cart</a>
+                                    <a href="#" className="btn btn-outline-primary-2"><span>Checkout</span><i className="icon-long-arrow-right"></i></a>
+                                </div>
                             </div>
                         </div>
-
-                        <div className="dropdown-cart-total">
-                            <span>Total</span>
-
-                            <span className="cart-total-price">$160.00</span>
-                        </div>
-
-                        <div className="dropdown-cart-action">
-                            <a href="#" className="btn btn-primary">View Cart</a>
-                            <a href="#" className="btn btn-outline-primary-2"><span>Checkout</span><i className="icon-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+                    </>
+                )}
             </div>
         </div>
       </header>

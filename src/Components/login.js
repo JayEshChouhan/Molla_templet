@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from "./header";
 import Footer from "./footer";
 import Mybreadcrumb  from "./breadcrumb";
-import { LoginApi, LoginUserApi } from "../api/login/login";
+import { LoginApi, LoginUserApi, SinginApi } from "../api/login/login";
 import axios from "axios";
 var sectionStyle = {
 	backgroundImage: "url(images/login-bg.jpg)"
@@ -15,6 +15,7 @@ var sectionStyle = {
 export default function Login(prop){
 	const [name,setName]=useState("");
 	const [email,setEmail]=useState("");
+	const [mobile_number,setNumber]=useState("");
 	const [password , setPassword]= useState("");
 	const [confirm_password,setConfirmPassword]= useState("");
 	
@@ -23,41 +24,10 @@ export default function Login(prop){
 			email: email,
 			password: password
 		}
-
-		// await axios.post("http://127.0.0.1:8000/login/" , item)
-		// .then(res => {
-		// 	if (res.status === 200){
-		// 		localStorage.setItem("isUserAthanticated",true)
-		// 		AuthStr = "Bearer "+res.data.access
-		// 		console.log(res.data.access)
-		// 		toast.success("Success!")
-		// 		// window.location.href = '/my_account';
-				
-		// 	}
-		// 	else{
-		// 		toast.error("error")
-		// 	}
-		// })
-		// .catch(err => {
-		// 	console.log(err);
-		// 	toast.error(" " + err);		
-		// });
-		const response = await LoginApi(item);
-
-		const res = await LoginUserApi();
-		console.log(res.data);
-		// await axios.get("http://127.0.0.1:8000/user/user_detail/", { 
-		// 	headers: { 
-		// 		Authorization: AuthStr 
-		// 	} 
-		// })
-		// .then(response => {
-		// 	// console.log(prop.isUserAthanticated)
-		// 	localStorage.setItem("UserData",JSON.stringify(response.data))
-		// })
-		// .catch((error) => {
-		// 	console.log('error ' + error);
-		// });
+		await LoginApi(item);
+		await LoginUserApi();
+		localStorage.setItem("isUserAthanticated",true)
+		window.location.href = '/my_account';
 		// await axios.get("http://127.0.0.1:8000/address/", { 
 		// 	headers: { 
 		// 		Authorization: AuthStr 
@@ -76,22 +46,13 @@ export default function Login(prop){
 		let item={
 			name: name,
 			email: email,
+			mobile_number: mobile_number,
 			password: password,
 			confirm_password: confirm_password
 		}
-		await axios.post("http://127.0.0.1:8000/user/user_registration/" , item)
-		.then(res => {
-			if (res.status === 200){
-				toast.success("Success!")
-			}
-			else{
-				toast.error("error")
-			}
-		})
-		.catch(err => {
-			console.log(err);	
-			toast.error(err);	
-		});
+		await SinginApi(item);
+		await LoginApi(item);
+		await LoginUserApi();
 	}
     return(
         <div className='page-wrapper'>
@@ -172,6 +133,10 @@ export default function Login(prop){
 											<div class="form-group">
 												<label for="register-email-2">Your email address *</label>
 												<input type="email" class="form-control" id="register-email-2" onChange={(e)=>setEmail(e.target.value)}  name="register-email" required />
+											</div>
+											<div class="form-group">
+												<label for="register-Number-2">Your Mobile Number *</label>
+												<input type="tel" class="form-control" id="register-Number-2" onChange={(e)=>setNumber(e.target.value)}  name="register-email" required />
 											</div>
 											<div class="form-group">
 												<label for="register-password-1">Password *</label>

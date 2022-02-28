@@ -77,7 +77,7 @@ export default function Myaccount(prop) {
                                                         <div className="card card-dashboard">
                                                             <div className="card-body">
                                                                 <h3 className="card-title">Billing Address</h3>
-                                                                <p>{prop.data.name}<br/>
+                                                                {/* <p>{ prop.data.name }<br/>
                                                                 {prop.addressData[2].house_building_number}<br/>
                                                                 {prop.addressData[2].land_mark}<br/>
                                                                 {prop.addressData[2].village_city}<br/>
@@ -86,7 +86,7 @@ export default function Myaccount(prop) {
                                                                 {prop.addressData[2].state}<br/>
                                                                 {prop.addressData[2].country}<br/>
                                                                 {prop.addressData[2].full_address}<br/>
-                                                                <a href="#">Edit <i className="icon-edit"></i></a></p>
+                                                                <a href="#">Edit <i className="icon-edit"></i></a></p> */}
                                                             </div>
                                                         </div>
                                                     </Col>
